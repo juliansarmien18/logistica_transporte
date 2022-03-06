@@ -1,6 +1,12 @@
 package com.example.ingeneo.models;
 
+import java.util.List;
+
 import javax.persistence.*;
+
+
+
+
 
 @Entity
 @Table(name = "document_type")
@@ -11,11 +17,15 @@ public class DocumentTypeModel {
     @Column(unique = true, nullable = false)
     private Long id;
     
-    @Column(length = 80)
+    @Column(length = 80,nullable = false)
     private String name;
 
-    @Column(length = 4)
+    @Column(length = 4,nullable = false)
     private String abbreviation;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="document_type",nullable = false)
+    private List<ClientModel> clients;
 
 
     public Long getId() {
@@ -42,5 +52,12 @@ public class DocumentTypeModel {
         this.abbreviation = abbreviation;
     }
 
+    public List<ClientModel> getClients() {
+        return this.clients;
+    }
+
+    public void setClients(List<ClientModel> clients) {
+        this.clients = clients;
+    }
 
 }

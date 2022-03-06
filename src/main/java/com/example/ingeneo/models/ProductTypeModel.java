@@ -1,5 +1,7 @@
 package com.example.ingeneo.models;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,18 @@ public class ProductTypeModel {
     @Column(length = 20,nullable = false)
     private String name;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="product_type_id",nullable = false)
+    private List<ClientProductLogisticModel> client_product_logistic_type;
+
+
+    public List<ClientProductLogisticModel> getClient_product_logistic_type() {
+        return client_product_logistic_type;
+    }
+
+    public void setClient_product_logistic_type(List<ClientProductLogisticModel> client_product_logistic_type) {
+        this.client_product_logistic_type = client_product_logistic_type;
+    }
 
     public Long getId() {
         return this.id;

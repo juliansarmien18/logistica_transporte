@@ -1,6 +1,7 @@
 package com.example.ingeneo.models;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -33,6 +34,9 @@ public class StoragePlaceModel {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="storage_place_id",nullable = false)
     private List<MaritimeLogisticModel> maritime_losgistic;
+
+    @ManyToMany(mappedBy = "storage_places")
+    private Set<ClientModel> client;
 
 
     public Long getId() {
@@ -90,5 +94,14 @@ public class StoragePlaceModel {
     public void setMaritime_losgistic(List<MaritimeLogisticModel> maritime_losgistic) {
         this.maritime_losgistic = maritime_losgistic;
     }
+
+    public Set<ClientModel> getClient() {
+        return this.client;
+    }
+
+    public void setClient(Set<ClientModel> client) {
+        this.client = client;
+    }
+
 
 }

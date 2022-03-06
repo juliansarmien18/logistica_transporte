@@ -1,6 +1,7 @@
 package com.example.ingeneo.models;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -37,6 +38,29 @@ public class ClientModel {
     @JoinColumn(name="client_id",nullable = false)
     private List<LandLogisticModel> land_logistic;
 
+    @ManyToMany(cascade = {
+        CascadeType.PERSIST,
+        CascadeType.MERGE
+    })
+    @JoinTable(
+        name = "client_storage_place",
+        joinColumns = {@JoinColumn(name = "client_id")},
+        inverseJoinColumns = {@JoinColumn(name = "storage_place_id")}
+    )
+    private Set<StoragePlaceModel> storage_places;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="client_id",nullable = false)
+    private List<ClientProductLogisticModel> client_product_logistic_type;
+
+
+    public List<ClientProductLogisticModel> getClient_product_logistic_type() {
+        return client_product_logistic_type;
+    }
+
+    public void setClient_product_logistic_type(List<ClientProductLogisticModel> client_product_logistic_type) {
+        this.client_product_logistic_type = client_product_logistic_type;
+    }
 
     public Long getId() {
         return this.id;
@@ -86,11 +110,11 @@ public class ClientModel {
         this.password = password;
     }
 
-    public List<MaritimeLogisticModel> getMaritime_losgistic() {
+    public List<MaritimeLogisticModel> getMaritime_logistic() {
         return this.maritime_logistic;
     }
 
-    public void setMaritime_losgistic(List<MaritimeLogisticModel> maritime_logistic) {
+    public void setMaritime_logistic(List<MaritimeLogisticModel> maritime_logistic) {
         this.maritime_logistic = maritime_logistic;
     }
 
@@ -100,6 +124,14 @@ public class ClientModel {
 
     public void setLand_logistic(List<LandLogisticModel> land_logistic) {
         this.land_logistic = land_logistic;
+    }
+
+    public Set<StoragePlaceModel> getStorage_place() {
+        return this.storage_places;
+    }
+
+    public void setStorage_place(Set<StoragePlaceModel> storage_places) {
+        this.storage_places = storage_places;
     }
 
 

@@ -1,91 +1,170 @@
 package com.example.ingeneo.models;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.sql.*;
 
 
 @Entity
 @Table(name = "maritime_logistic")
-public class MaritimeLogisticModel {
+public class MaritimeLogisticModel implements Serializable{
     
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Basic(optional = false)
+    @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false)
-    private Float quantity;
-    
-    @Column(nullable = false)
-    private Timestamp register_date;
+    @Basic(optional = false)
+    @Column(name = "delivery_date",nullable = false)
+    private Timestamp deliveryDate;
 
-    @Column(nullable = false)
-    private Timestamp delivery_date;
+    @Basic(optional = false)
+    @Column(length = 8,name = "fleet_number",nullable = false)
+    private String fleetNumber;
 
-    @Column(nullable = false)
-    private Float shipping_price;
+    @Basic(optional = false)
+    @Column(length = 10,name = "guide_number",nullable = false)
+    private String guideNumber;
 
-    @Column(nullable = false,length = 8)
-    private String fleet_number;
+    @Basic(optional = false)
+    @Column(name = "quantity",nullable = false)
+    private float quantity;
 
-    @Column(unique = true,nullable = false,length = 10)
-    private String guide_number;
+    @Basic(optional = false)
+    @Column(name = "register_date",nullable = false)
+    private Timestamp registerDate;
+
+    @Basic(optional = false)
+    @Column(name = "shipping_price",nullable = false)
+    private float shippingPrice;
+
+    @JoinColumn(name = "client_model_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private ClientModel ClientModelId;
+
+    @JoinColumn(name = "storage_place_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private StoragePlaceModel StoragePlaceModelId;
+
+    public MaritimeLogisticModel() {
+    }
+
+    public MaritimeLogisticModel(Long id) {
+        this.id = id;
+    }
+
+
+    public MaritimeLogisticModel(Long id, Timestamp deliveryDate, String fleetNumber, String guideNumber, float quantity, Timestamp registerDate, float shippingPrice, ClientModel ClientModelId, StoragePlaceModel StoragePlaceModelId) {
+        this.id = id;
+        this.deliveryDate = deliveryDate;
+        this.fleetNumber = fleetNumber;
+        this.guideNumber = guideNumber;
+        this.quantity = quantity;
+        this.registerDate = registerDate;
+        this.shippingPrice = shippingPrice;
+        this.ClientModelId = ClientModelId;
+        this.StoragePlaceModelId = StoragePlaceModelId;
+    }
 
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Float getQuantity() {
-        return this.quantity;
+    public Timestamp getDeliveryDate() {
+        return deliveryDate;
     }
 
-    public void setQuantity(Float quantity) {
+    public void setDeliveryDate(Timestamp deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public String getFleetNumber() {
+        return fleetNumber;
+    }
+
+    public void setFleetNumber(String fleetNumber) {
+        this.fleetNumber = fleetNumber;
+    }
+
+    public String getGuideNumber() {
+        return guideNumber;
+    }
+
+    public void setGuideNumber(String guideNumber) {
+        this.guideNumber = guideNumber;
+    }
+
+    public float getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
 
-    public Timestamp getRegister_date() {
-        return this.register_date;
+    public Timestamp getRegisterDate() {
+        return registerDate;
     }
 
-    public void setRegister_date(Timestamp register_date) {
-        this.register_date = register_date;
+    public void setRegisterDate(Timestamp registerDate) {
+        this.registerDate = registerDate;
     }
 
-    public Timestamp getDelivery_date() {
-        return this.delivery_date;
+    public float getShippingPrice() {
+        return shippingPrice;
     }
 
-    public void setDelivery_date(Timestamp delivery_date) {
-        this.delivery_date = delivery_date;
+    public void setShippingPrice(float shippingPrice) {
+        this.shippingPrice = shippingPrice;
     }
 
-    public Float getShipping_price() {
-        return this.shipping_price;
+    public ClientModel getClientModelId() {
+        return ClientModelId;
     }
 
-    public void setShipping_price(Float shipping_price) {
-        this.shipping_price = shipping_price;
+    public void setClientModelId(ClientModel ClientModelId) {
+        this.ClientModelId = ClientModelId;
     }
 
-    public String getFleet_number() {
-        return this.fleet_number;
+    public StoragePlaceModel getStoragePlaceModelId() {
+        return StoragePlaceModelId;
     }
 
-    public void setFleet_number(String fleet_number) {
-        this.fleet_number = fleet_number;
+    public void setStoragePlaceModelId(StoragePlaceModel StoragePlaceModelId) {
+        this.StoragePlaceModelId = StoragePlaceModelId;
     }
 
-    public String getGuide_number() {
-        return this.guide_number;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
     }
 
-    public void setGuide_number(String guide_number) {
-        this.guide_number = guide_number;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof MaritimeLogisticModel)) {
+            return false;
+        }
+        MaritimeLogisticModel other = (MaritimeLogisticModel) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.mycompany.ingeneo.MaritimeLogisticModel[ id=" + id + " ]";
     }
 
 

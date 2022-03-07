@@ -1,47 +1,46 @@
 package com.example.ingeneo.models;
 
-import java.util.List;
+import java.io.Serializable;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "logistic_type")
-public class LogisticTypeModel {
+public class LogisticTypeModel implements Serializable{
     
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Basic(optional = false)
+    @Column(name = "id")
     private Long id;
 
-    @Column(length = 20,nullable = false)
+    @Basic(optional = false)
+    @Column(length = 20,name = "name",nullable = false)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="logistic_type_id",nullable = false)
-    private List<StoragePlaceModel> storage_place;
+    /*
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "logisticTypeModelId")
+    private Collection<ClientProductLogisticModel> clientProductLogisticModelCollection;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="logistic_type_id",nullable = false)
-    private List<ClientProductLogisticModel> client_product_logistic_type;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "logisticTypeModelId")
+    private Collection<StoragePlaceModel> storagePlaceModelCollection;*/
 
-    public List<ClientProductLogisticModel> getClient_product_logistic_type() {
-        return client_product_logistic_type;
+
+    public LogisticTypeModel() {
     }
 
-    public void setClient_product_logistic_type(List<ClientProductLogisticModel> client_product_logistic_type) {
-        this.client_product_logistic_type = client_product_logistic_type;
+    public LogisticTypeModel(Long id) {
+        this.id = id;
     }
 
-    public List<StoragePlaceModel> getStorage_place() {
-        return storage_place;
-    }
-
-    public void setStorage_place(List<StoragePlaceModel> storage_place) {
-        this.storage_place = storage_place;
+    public LogisticTypeModel(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -49,10 +48,36 @@ public class LogisticTypeModel {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof LogisticTypeModel)) {
+            return false;
+        }
+        LogisticTypeModel other = (LogisticTypeModel) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.mycompany.ingeneo.LogisticTypeModel[ id=" + id + " ]";
+    }
+    
 }

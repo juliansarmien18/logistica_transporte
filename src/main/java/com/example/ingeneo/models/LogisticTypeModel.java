@@ -16,7 +16,7 @@ public class LogisticTypeModel implements Serializable{
     private Long id;
 
     @Basic(optional = false)
-    @Column(length = 20,name = "name",nullable = false)
+    @Column(length = 20,name = "name",nullable = false,unique = true)
     private String name;
 
     /*

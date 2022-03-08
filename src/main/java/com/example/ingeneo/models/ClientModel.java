@@ -16,11 +16,11 @@ public class ClientModel implements Serializable{
     private Long id;
 
     @Basic(optional = false)
-    @Column(name = "document_number",nullable = false)
+    @Column(name = "document_number",nullable = false,unique = true)
     private long documentNumber;
     
     @Basic(optional = false)
-    @Column(length = 60, name = "email",nullable = false)
+    @Column(length = 60, name = "email",nullable = false,unique = true)
     private String email;
 
     @Basic(optional = false)

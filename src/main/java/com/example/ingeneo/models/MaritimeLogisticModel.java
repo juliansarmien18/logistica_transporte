@@ -26,7 +26,7 @@ public class MaritimeLogisticModel implements Serializable{
     private String fleetNumber;
 
     @Basic(optional = false)
-    @Column(length = 10,name = "guide_number",nullable = false)
+    @Column(length = 10,name = "guide_number",nullable = false,unique = true)
     private String guideNumber;
 
     @Basic(optional = false)

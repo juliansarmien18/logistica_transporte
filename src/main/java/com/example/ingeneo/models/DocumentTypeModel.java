@@ -19,11 +19,11 @@ public class DocumentTypeModel implements Serializable{
     private Long id;
 
     @Basic(optional = false)
-    @Column(length = 4,name = "abbreviation",nullable = false)
+    @Column(length = 4,name = "abbreviation",nullable = false,unique = true)
     private String abbreviation;
 
     @Basic(optional = false)
-    @Column(length = 80,name = "name",nullable = false)
+    @Column(length = 80,name = "name",nullable = false,unique = true)
     private String name;
 
     /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "DocumentTypeModelId")

@@ -61,7 +61,8 @@ public class LandLogisticModel implements Serializable{
     }
 
 
-    public LandLogisticModel(Long id, Timestamp deliveryDate, String guideNumber, String licensePlate, float quantity, Timestamp registerDate, float shippingPrice, ClientModel ClientModelId, StoragePlaceModel storagePlaceModelId) {
+
+    public LandLogisticModel(Long id, Timestamp deliveryDate, String guideNumber, String licensePlate, float quantity, Timestamp registerDate, float shippingPrice, float finalPrice, ClientModel ClientModelId, StoragePlaceModel storagePlaceModelId) {
         this.id = id;
         this.deliveryDate = deliveryDate;
         this.guideNumber = guideNumber;
@@ -69,9 +70,12 @@ public class LandLogisticModel implements Serializable{
         this.quantity = quantity;
         this.registerDate = registerDate;
         this.shippingPrice = shippingPrice;
+        this.finalPrice = finalPrice;
         this.ClientModelId = ClientModelId;
         this.storagePlaceModelId = storagePlaceModelId;
     }
+
+
     
     
 
@@ -155,21 +159,6 @@ public class LandLogisticModel implements Serializable{
         this.shippingPrice = shippingPrice;
     }
 
-    public ClientModel getclientModelId() {
-        return ClientModelId;
-    }
-
-    public void setclientModelId(ClientModel ClientModelId) {
-        this.ClientModelId = ClientModelId;
-    }
-
-    public StoragePlaceModel getstoragePlaceModelId() {
-        return storagePlaceModelId;
-    }
-
-    public void setstoragePlaceModelId(StoragePlaceModel storagePlaceModelId) {
-        this.storagePlaceModelId = storagePlaceModelId;
-    }
 
     @Override
     public int hashCode() {

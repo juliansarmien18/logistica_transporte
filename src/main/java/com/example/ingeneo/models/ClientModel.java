@@ -68,6 +68,7 @@ public class ClientModel implements Serializable{
         this.DocumentTypeModelId = DocumentTypeModelId;
     }
 
+
     public Long getId() {
         return id;
     }

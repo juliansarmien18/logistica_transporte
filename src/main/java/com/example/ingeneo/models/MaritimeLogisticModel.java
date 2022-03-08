@@ -41,6 +41,10 @@ public class MaritimeLogisticModel implements Serializable{
     @Column(name = "shipping_price",nullable = false)
     private float shippingPrice;
 
+    @Basic(optional = false)
+    @Column(name = "final_price",nullable = false)
+    private float finalPrice;
+
     @JoinColumn(name = "client_model_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ClientModel ClientModelId;
@@ -69,6 +73,15 @@ public class MaritimeLogisticModel implements Serializable{
         this.StoragePlaceModelId = StoragePlaceModelId;
     }
 
+    
+
+    public float getFinalPrice() {
+        return finalPrice;
+    }
+
+    public void setFinalPrice(float finalPrice) {
+        this.finalPrice = finalPrice;
+    }
 
     public Long getId() {
         return id;

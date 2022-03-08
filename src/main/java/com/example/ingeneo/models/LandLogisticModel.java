@@ -41,6 +41,10 @@ public class LandLogisticModel implements Serializable{
     @Column(name = "shipping_price",nullable = false)
     private float shippingPrice;
 
+    @Basic(optional = false)
+    @Column(name = "final_price",nullable = false)
+    private float finalPrice;
+
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ClientModel ClientModelId;
@@ -69,6 +73,31 @@ public class LandLogisticModel implements Serializable{
         this.storagePlaceModelId = storagePlaceModelId;
     }
     
+    
+
+    public float getFinalPrice() {
+        return finalPrice;
+    }
+
+    public void setFinalPrice(float finalPrice) {
+        this.finalPrice = finalPrice;
+    }
+
+    public ClientModel getClientModelId() {
+        return ClientModelId;
+    }
+
+    public void setClientModelId(ClientModel clientModelId) {
+        ClientModelId = clientModelId;
+    }
+
+    public StoragePlaceModel getStoragePlaceModelId() {
+        return storagePlaceModelId;
+    }
+
+    public void setStoragePlaceModelId(StoragePlaceModel storagePlaceModelId) {
+        this.storagePlaceModelId = storagePlaceModelId;
+    }
 
     public Long getId() {
         return id;

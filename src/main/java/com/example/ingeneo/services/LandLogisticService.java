@@ -38,7 +38,7 @@ public class LandLogisticService {
         }else{
             finalPrice = LandLogistic.getShippingPrice();
         }
-         
+        
 
         return landLogisticRepository.save(LandLogistic = new LandLogisticModel(
             LandLogistic.getId(),deliveryDate,LandLogistic.getGuideNumber(),

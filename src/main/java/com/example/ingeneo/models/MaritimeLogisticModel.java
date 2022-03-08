@@ -61,7 +61,8 @@ public class MaritimeLogisticModel implements Serializable{
     }
 
 
-    public MaritimeLogisticModel(Long id, Timestamp deliveryDate, String fleetNumber, String guideNumber, float quantity, Timestamp registerDate, float shippingPrice, ClientModel ClientModelId, StoragePlaceModel StoragePlaceModelId) {
+
+    public MaritimeLogisticModel(Long id, Timestamp deliveryDate, String fleetNumber, String guideNumber, float quantity, Timestamp registerDate, float shippingPrice, float finalPrice, ClientModel ClientModelId, StoragePlaceModel StoragePlaceModelId) {
         this.id = id;
         this.deliveryDate = deliveryDate;
         this.fleetNumber = fleetNumber;
@@ -69,9 +70,11 @@ public class MaritimeLogisticModel implements Serializable{
         this.quantity = quantity;
         this.registerDate = registerDate;
         this.shippingPrice = shippingPrice;
+        this.finalPrice = finalPrice;
         this.ClientModelId = ClientModelId;
         this.StoragePlaceModelId = StoragePlaceModelId;
     }
+
 
     
 

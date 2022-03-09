@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import com.example.ingeneo.models.ClientModel;
+
 import com.example.ingeneo.repositories.ClientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class ClientService {
 
     public ClientModel saveClient(ClientModel client){
         return clientRepository.save(client = new ClientModel(client.getId(), client.getDocumentNumber(),client.getEmail(),client.getFirstName(),
-                                    client.getLastname(),client.getPassword(), client.getDocumentTypeModelId()));
+                                    client.getLastname(),client.getPassword(),client.getDocumentTypeModelId()));
     }
 
     public Optional<ClientModel>getById(Long id){

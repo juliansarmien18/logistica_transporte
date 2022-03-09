@@ -1,7 +1,6 @@
 package com.example.ingeneo.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.*;
 
@@ -35,18 +34,6 @@ public class ClientModel implements Serializable{
     @Basic(optional = false)
     @Column(length = 15,name = "password",nullable = false)
     private String password;
-
-    @ManyToMany(mappedBy = "ClientModelCollection")
-    private Collection<StoragePlaceModel> StoragePlaceModelCollection;
-    /*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ClientModelId")
-    private Collection<LandLogisticModel> LandLogisticModelCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ClientModelId")
-    private Collection<ClientProductLogisticModel> ClientProductLogisticModelCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ClientModelId")
-    private Collection<MaritimeLogisticModel> MaritimeLogisticModelCollection;*/
     
     @JoinColumn(name = "document_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -59,7 +46,8 @@ public class ClientModel implements Serializable{
         this.id = id;
     }
 
-    public ClientModel(Long id, long documentNumber, String email, String firstName, String lastname, String password, DocumentTypeModel DocumentTypeModelId) {
+
+    public ClientModel(Long id, long documentNumber, String email, String firstName, String lastname, String password,DocumentTypeModel DocumentTypeModelId) {
         this.id = id;
         this.documentNumber = documentNumber;
         this.email = email;
@@ -67,16 +55,6 @@ public class ClientModel implements Serializable{
         this.lastname = lastname;
         this.password = password;
         this.DocumentTypeModelId = DocumentTypeModelId;
-    }
-
-    
-
-    public Collection<StoragePlaceModel> getStoragePlaceModelCollection() {
-        return StoragePlaceModelCollection;
-    }
-
-    public void setStoragePlaceModelCollection(Collection<StoragePlaceModel> storagePlaceModelCollection) {
-        StoragePlaceModelCollection = storagePlaceModelCollection;
     }
 
     public Long getId() {

@@ -1,7 +1,6 @@
 package com.example.ingeneo.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.*;
 
@@ -32,12 +31,6 @@ public class StoragePlaceModel implements Serializable{
     @Basic(optional = false)
     @Column(length = 30,name = "name",nullable = false)
     private String name;
-
-    @JoinTable(name = "client_storage_place", joinColumns = {
-        @JoinColumn(name = "storage_place_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "client_id", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<ClientModel> ClientModelCollection;
 
     /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storagePlaceModelId")
@@ -106,14 +99,6 @@ public class StoragePlaceModel implements Serializable{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Collection<ClientModel> getClientModelCollection() {
-        return ClientModelCollection;
-    }
-
-    public void setClientModelCollection(Collection<ClientModel> ClientModelCollection) {
-        this.ClientModelCollection = ClientModelCollection;
     }
 
     public LogisticTypeModel getLogisticTypeModelId() {

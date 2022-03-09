@@ -1,138 +1,164 @@
 package com.example.ingeneo.models;
 
-import java.util.List;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "client")
-public class ClientModel {
+public class ClientModel implements Serializable{
     
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Basic(optional = false)
+    @Column(name = "id")
     private Long id;
 
+    @Basic(optional = false)
+    @Column(name = "document_number",nullable = false,unique = true)
+    private long documentNumber;
     
-    @Column(unique = true,nullable = false)
-    private Long document_number;
-    
-    @Column(nullable = false,length = 20)
-    private String first_name;
-
-    @Column(nullable = false,length = 20)
-    private String lastname;
-
-    @Column(unique = true,nullable = false,length = 60)
+    @Basic(optional = false)
+    @Column(length = 60, name = "email",nullable = false,unique = true)
     private String email;
 
-    @Column(nullable = false,length = 15)
+    @Basic(optional = false)
+    @Column(length = 20,name = "first_name",nullable = false)
+    private String firstName;
+
+    @Basic(optional = false)
+    @Column(length = 20,name = "lastname",nullable = false)
+    private String lastname;
+
+    @Basic(optional = false)
+    @Column(length = 15,name = "password",nullable = false)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="client_id",nullable = false)
-    private List<MaritimeLogisticModel> maritime_logistic;
+    @ManyToMany(mappedBy = "ClientModelCollection")
+    private Collection<StoragePlaceModel> StoragePlaceModelCollection;
+    /*
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ClientModelId")
+    private Collection<LandLogisticModel> LandLogisticModelCollection;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="client_id",nullable = false)
-    private List<LandLogisticModel> land_logistic;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ClientModelId")
+    private Collection<ClientProductLogisticModel> ClientProductLogisticModelCollection;
 
-    @ManyToMany(cascade = {
-        CascadeType.PERSIST,
-        CascadeType.MERGE
-    })
-    @JoinTable(
-        name = "client_storage_place",
-        joinColumns = {@JoinColumn(name = "client_id")},
-        inverseJoinColumns = {@JoinColumn(name = "storage_place_id")}
-    )
-    private Set<StoragePlaceModel> storage_places;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ClientModelId")
+    private Collection<MaritimeLogisticModel> MaritimeLogisticModelCollection;*/
+    
+    @JoinColumn(name = "document_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private DocumentTypeModel DocumentTypeModelId;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="client_id",nullable = false)
-    private List<ClientProductLogisticModel> client_product_logistic_type;
-
-
-    public List<ClientProductLogisticModel> getClient_product_logistic_type() {
-        return client_product_logistic_type;
+    public ClientModel() {
     }
 
-    public void setClient_product_logistic_type(List<ClientProductLogisticModel> client_product_logistic_type) {
-        this.client_product_logistic_type = client_product_logistic_type;
+    public ClientModel(Long id) {
+        this.id = id;
+    }
+
+    public ClientModel(Long id, long documentNumber, String email, String firstName, String lastname, String password, DocumentTypeModel DocumentTypeModelId) {
+        this.id = id;
+        this.documentNumber = documentNumber;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastname = lastname;
+        this.password = password;
+        this.DocumentTypeModelId = DocumentTypeModelId;
+    }
+
+    
+
+    public Collection<StoragePlaceModel> getStoragePlaceModelCollection() {
+        return StoragePlaceModelCollection;
+    }
+
+    public void setStoragePlaceModelCollection(Collection<StoragePlaceModel> storagePlaceModelCollection) {
+        StoragePlaceModelCollection = storagePlaceModelCollection;
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getDocument_number() {
-        return this.document_number;
+    public long getDocumentNumber() {
+        return documentNumber;
     }
 
-    public void setDocument_number(Long document_number) {
-        this.document_number = document_number;
-    }
-
-    public String getFirst_name() {
-        return this.first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLastname() {
-        return this.lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setDocumentNumber(long documentNumber) {
+        this.documentNumber = documentNumber;
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public List<MaritimeLogisticModel> getMaritime_logistic() {
-        return this.maritime_logistic;
+    public DocumentTypeModel getDocumentTypeModelId() {
+        return DocumentTypeModelId;
     }
 
-    public void setMaritime_logistic(List<MaritimeLogisticModel> maritime_logistic) {
-        this.maritime_logistic = maritime_logistic;
+    public void setDocumentTypeModelId(DocumentTypeModel DocumentTypeModelId) {
+        this.DocumentTypeModelId = DocumentTypeModelId;
     }
 
-    public List<LandLogisticModel> getLand_logistic() {
-        return this.land_logistic;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
     }
 
-    public void setLand_logistic(List<LandLogisticModel> land_logistic) {
-        this.land_logistic = land_logistic;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof ClientModel)) {
+            return false;
+        }
+        ClientModel other = (ClientModel) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
-    public Set<StoragePlaceModel> getStorage_place() {
-        return this.storage_places;
+    @Override
+    public String toString() {
+        return "com.mycompany.ingeneo.ClientModel[ id=" + id + " ]";
     }
-
-    public void setStorage_place(Set<StoragePlaceModel> storage_places) {
-        this.storage_places = storage_places;
-    }
-
+    
 
 }

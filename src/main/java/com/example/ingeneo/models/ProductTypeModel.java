@@ -1,36 +1,42 @@
 package com.example.ingeneo.models;
 
-import java.util.List;
+import java.io.Serializable;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "product_type")
-public class ProductTypeModel {
+public class ProductTypeModel implements Serializable{
     
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Basic(optional = false)
+    @Column(name = "id")
     private Long id;
 
-    @Column(length = 20,nullable = false)
+    @Basic(optional = false)
+    @Column(length = 20,name = "name",nullable = false,unique = true)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="product_type_id",nullable = false)
-    private List<ClientProductLogisticModel> client_product_logistic_type;
+    /*
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productTypeModelId")
+    private Collection<ClientProductLogisticModel> ClientProductLogisticModelCollection;*/
 
-
-    public List<ClientProductLogisticModel> getClient_product_logistic_type() {
-        return client_product_logistic_type;
+    public ProductTypeModel() {
     }
 
-    public void setClient_product_logistic_type(List<ClientProductLogisticModel> client_product_logistic_type) {
-        this.client_product_logistic_type = client_product_logistic_type;
+    public ProductTypeModel(Long id) {
+        this.id = id;
+    }
+
+    public ProductTypeModel(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -38,11 +44,37 @@ public class ProductTypeModel {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof ProductTypeModel)) {
+            return false;
+        }
+        ProductTypeModel other = (ProductTypeModel) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.mycompany.ingeneo.ProductTypeModel[ id=" + id + " ]";
+    }
+    
 
 }

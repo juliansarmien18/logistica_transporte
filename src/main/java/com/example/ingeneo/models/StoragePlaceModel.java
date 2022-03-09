@@ -1,107 +1,156 @@
 package com.example.ingeneo.models;
 
-import java.util.List;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.*;
 
 
 @Entity
 @Table(name = "storage_place")
-public class StoragePlaceModel {
+public class StoragePlaceModel implements Serializable{
     
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Basic(optional = false)
+    @Column(name = "id")
     private Long id;
 
-    @Column(length = 30,nullable = false)
-    private String name;
-
-    @Column(length = 80,nullable = false)
-    private String country;
-
-    @Column(length = 80,nullable = false)
-    private String city;
-
-    @Column(length = 255,nullable = false)
+    @Basic(optional = false)
+    @Column(length = 255,name = "address",nullable = false)
     private String address;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="storage_place_id",nullable = false)
-    private List<LandLogisticModel> land_logistic;
+    @Basic(optional = false)
+    @Column(length = 80,name = "city",nullable = false)
+    private String city;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="storage_place_id",nullable = false)
-    private List<MaritimeLogisticModel> maritime_losgistic;
+    @Basic(optional = false)
+    @Column(length = 80,name = "country",nullable = false)
+    private String country;
 
-    @ManyToMany(mappedBy = "storage_places")
-    private Set<ClientModel> client;
+    @Basic(optional = false)
+    @Column(length = 30,name = "name",nullable = false)
+    private String name;
+
+    @JoinTable(name = "client_storage_place", joinColumns = {
+        @JoinColumn(name = "storage_place_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "client_id", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<ClientModel> ClientModelCollection;
+
+    /*
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storagePlaceModelId")
+    private Collection<LandLogisticModel> LandLogisticModelCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "StoragePlaceModelId")
+    private Collection<MaritimeLogisticModel> MaritimeLogisticModelCollection;*/
+
+    @JoinColumn(name = "logistic_type_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private LogisticTypeModel logisticTypeModelId;
+
+    public StoragePlaceModel() {
+    }
+
+    public StoragePlaceModel(Long id) {
+        this.id = id;
+    }
+
+
+    public StoragePlaceModel(Long id, String address, String city, String country, String name, LogisticTypeModel logisticTypeModelId) {
+        this.id = id;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.name = name;
+        this.logisticTypeModelId = logisticTypeModelId;
+    }
 
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCountry() {
-        return this.country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return this.city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getAddress() {
-        return this.address;
+        return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public List<LandLogisticModel> getLand_logistic() {
-        return this.land_logistic;
+    public String getCity() {
+        return city;
     }
 
-    public void setLand_logistic(List<LandLogisticModel> land_logistic) {
-        this.land_logistic = land_logistic;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public List<MaritimeLogisticModel> getMaritime_losgistic() {
-        return this.maritime_losgistic;
+    public String getCountry() {
+        return country;
     }
 
-    public void setMaritime_losgistic(List<MaritimeLogisticModel> maritime_losgistic) {
-        this.maritime_losgistic = maritime_losgistic;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public Set<ClientModel> getClient() {
-        return this.client;
+    public String getName() {
+        return name;
     }
 
-    public void setClient(Set<ClientModel> client) {
-        this.client = client;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public Collection<ClientModel> getClientModelCollection() {
+        return ClientModelCollection;
+    }
+
+    public void setClientModelCollection(Collection<ClientModel> ClientModelCollection) {
+        this.ClientModelCollection = ClientModelCollection;
+    }
+
+    public LogisticTypeModel getLogisticTypeModelId() {
+        return logisticTypeModelId;
+    }
+
+    public void setLogisticTypeModelId(LogisticTypeModel LogisticTypeModelId) {
+        this.logisticTypeModelId = LogisticTypeModelId;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof StoragePlaceModel)) {
+            return false;
+        }
+        StoragePlaceModel other = (StoragePlaceModel) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.mycompany.ingeneo.StoragePlaceModel[ id=" + id + " ]";
+    }
+
+ 
+    
 
 
 }

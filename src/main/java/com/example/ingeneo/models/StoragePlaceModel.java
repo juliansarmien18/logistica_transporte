@@ -58,13 +58,12 @@ public class StoragePlaceModel implements Serializable{
     }
 
 
-    public StoragePlaceModel(Long id, String address, String city, String country, String name, Collection<ClientModel> ClientModelCollection, LogisticTypeModel logisticTypeModelId) {
+    public StoragePlaceModel(Long id, String address, String city, String country, String name, LogisticTypeModel logisticTypeModelId) {
         this.id = id;
         this.address = address;
         this.city = city;
         this.country = country;
         this.name = name;
-        this.ClientModelCollection = ClientModelCollection;
         this.logisticTypeModelId = logisticTypeModelId;
     }
 

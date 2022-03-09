@@ -1,6 +1,7 @@
 package com.example.ingeneo.models;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.*;
 
@@ -35,9 +36,9 @@ public class ClientModel implements Serializable{
     @Column(length = 15,name = "password",nullable = false)
     private String password;
 
-    /*@ManyToMany(mappedBy = "ClientModelCollection")
+    @ManyToMany(mappedBy = "ClientModelCollection")
     private Collection<StoragePlaceModel> StoragePlaceModelCollection;
-
+    /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ClientModelId")
     private Collection<LandLogisticModel> LandLogisticModelCollection;
 
@@ -68,6 +69,15 @@ public class ClientModel implements Serializable{
         this.DocumentTypeModelId = DocumentTypeModelId;
     }
 
+    
+
+    public Collection<StoragePlaceModel> getStoragePlaceModelCollection() {
+        return StoragePlaceModelCollection;
+    }
+
+    public void setStoragePlaceModelCollection(Collection<StoragePlaceModel> storagePlaceModelCollection) {
+        StoragePlaceModelCollection = storagePlaceModelCollection;
+    }
 
     public Long getId() {
         return id;

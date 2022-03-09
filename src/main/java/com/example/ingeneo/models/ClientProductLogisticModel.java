@@ -19,7 +19,7 @@ public class ClientProductLogisticModel implements Serializable{
 
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ClientModel ClientModelId;
+    private ClientModel clientModelId;
 
     @JoinColumn(name = "logistic_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -37,9 +37,9 @@ public class ClientProductLogisticModel implements Serializable{
     }
 
 
-    public ClientProductLogisticModel(Long id, ClientModel ClientModelId, LogisticTypeModel logisticTypeModelId, ProductTypeModel productTypeModelId) {
+    public ClientProductLogisticModel(Long id, ClientModel clientModelId, LogisticTypeModel logisticTypeModelId, ProductTypeModel productTypeModelId) {
         this.id = id;
-        this.ClientModelId = ClientModelId;
+        this.clientModelId = clientModelId;
         this.logisticTypeModelId = logisticTypeModelId;
         this.productTypeModelId = productTypeModelId;
     }
@@ -53,12 +53,12 @@ public class ClientProductLogisticModel implements Serializable{
         this.id = id;
     }
 
-    public ClientModel getClientModelId() {
-        return ClientModelId;
+    public ClientModel getclientModelId() {
+        return clientModelId;
     }
 
-    public void setClientModelId(ClientModel ClientModelId) {
-        this.ClientModelId = ClientModelId;
+    public void setclientModelId(ClientModel clientModelId) {
+        this.clientModelId = clientModelId;
     }
 
     public LogisticTypeModel getLogisticTypeModelId() {

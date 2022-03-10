@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import com.example.ingeneo.models.ClientModel;
+import com.example.ingeneo.models.DocumentTypeModel;
 import com.example.ingeneo.services.ClientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,19 @@ public class ClientController {
         return clientService.getClients();
     }
 
-    @PostMapping()
-    public ClientModel postClient(@RequestBody ClientModel client){
-        return this.clientService.saveClient(client);
-    }
-
     @GetMapping(path = "/{id}")
     public Optional<ClientModel> getById(@PathVariable("id") Long id){
         return this.clientService.getById(id);
+    }
+
+    @GetMapping("/documenttype")
+    public ArrayList<ClientModel> getByClient(@RequestParam("documenttype") DocumentTypeModel documentType){
+        return this.clientService.getByDocumentType(documentType);
+    }
+
+    @PostMapping()
+    public ClientModel postClient(@RequestBody ClientModel client){
+        return this.clientService.saveClient(client);
     }
 
     @PutMapping(path = "/{id}")

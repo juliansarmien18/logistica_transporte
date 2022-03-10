@@ -47,7 +47,7 @@ public class LandLogisticModel implements Serializable{
 
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ClientModel ClientModelId;
+    private ClientModel clientModelId;
 
     @JoinColumn(name = "storage_place_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -62,7 +62,7 @@ public class LandLogisticModel implements Serializable{
 
 
 
-    public LandLogisticModel(Long id, Timestamp deliveryDate, String guideNumber, String licensePlate, float quantity, Timestamp registerDate, float shippingPrice, float finalPrice, ClientModel ClientModelId, StoragePlaceModel storagePlaceModelId) {
+    public LandLogisticModel(Long id, Timestamp deliveryDate, String guideNumber, String licensePlate, float quantity, Timestamp registerDate, float shippingPrice, float finalPrice, ClientModel clientModelId, StoragePlaceModel storagePlaceModelId) {
         this.id = id;
         this.deliveryDate = deliveryDate;
         this.guideNumber = guideNumber;
@@ -71,7 +71,7 @@ public class LandLogisticModel implements Serializable{
         this.registerDate = registerDate;
         this.shippingPrice = shippingPrice;
         this.finalPrice = finalPrice;
-        this.ClientModelId = ClientModelId;
+        this.clientModelId = clientModelId;
         this.storagePlaceModelId = storagePlaceModelId;
     }
 
@@ -88,11 +88,11 @@ public class LandLogisticModel implements Serializable{
     }
 
     public ClientModel getClientModelId() {
-        return ClientModelId;
+        return clientModelId;
     }
 
     public void setClientModelId(ClientModel clientModelId) {
-        ClientModelId = clientModelId;
+        this.clientModelId = clientModelId;
     }
 
     public StoragePlaceModel getStoragePlaceModelId() {

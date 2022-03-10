@@ -1,4 +1,4 @@
-package com.example.ingeneo.services;
+    package com.example.ingeneo.services;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -6,7 +6,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
+import com.example.ingeneo.models.ClientModel;
 import com.example.ingeneo.models.LandLogisticModel;
+import com.example.ingeneo.models.StoragePlaceModel;
 import com.example.ingeneo.repositories.LandLogisticRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,18 @@ public class LandLogisticService {
 
     public ArrayList<LandLogisticModel> getLandLogistics(){
         return (ArrayList<LandLogisticModel>) landLogisticRepository.findAll();
+    }
+
+    public Optional<LandLogisticModel>getById(Long id){
+        return landLogisticRepository.findById(id);
+    }
+
+    public ArrayList<LandLogisticModel> getByClient(ClientModel client){
+        return (ArrayList<LandLogisticModel>) landLogisticRepository.findByclientModelId(client);
+    }
+
+    public ArrayList<LandLogisticModel> getByStoragePlace(StoragePlaceModel storagePlace){
+        return (ArrayList<LandLogisticModel>) landLogisticRepository.findBystoragePlaceModelId(storagePlace);
     }
 
     public LandLogisticModel saveLandLogistic(LandLogisticModel LandLogistic){
@@ -47,9 +61,6 @@ public class LandLogisticService {
             LandLogistic.getStoragePlaceModelId()));
     }
 
-    public Optional<LandLogisticModel>getById(Long id){
-        return landLogisticRepository.findById(id);
-    }
 
     public boolean deleteLandLogistic(Long id){
         try{

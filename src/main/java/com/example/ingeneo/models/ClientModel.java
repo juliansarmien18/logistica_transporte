@@ -37,7 +37,7 @@ public class ClientModel implements Serializable{
     
     @JoinColumn(name = "document_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private DocumentTypeModel DocumentTypeModelId;
+    private DocumentTypeModel documentTypeModelId;
 
     public ClientModel() {
     }
@@ -47,14 +47,14 @@ public class ClientModel implements Serializable{
     }
 
 
-    public ClientModel(Long id, long documentNumber, String email, String firstName, String lastname, String password,DocumentTypeModel DocumentTypeModelId) {
+    public ClientModel(Long id, long documentNumber, String email, String firstName, String lastname, String password,DocumentTypeModel documentTypeModelId) {
         this.id = id;
         this.documentNumber = documentNumber;
         this.email = email;
         this.firstName = firstName;
         this.lastname = lastname;
         this.password = password;
-        this.DocumentTypeModelId = DocumentTypeModelId;
+        this.documentTypeModelId = documentTypeModelId;
     }
 
     public Long getId() {
@@ -106,11 +106,11 @@ public class ClientModel implements Serializable{
     }
 
     public DocumentTypeModel getDocumentTypeModelId() {
-        return DocumentTypeModelId;
+        return documentTypeModelId;
     }
 
     public void setDocumentTypeModelId(DocumentTypeModel DocumentTypeModelId) {
-        this.DocumentTypeModelId = DocumentTypeModelId;
+        this.documentTypeModelId = DocumentTypeModelId;
     }
 
     @Override

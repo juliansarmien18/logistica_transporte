@@ -47,11 +47,11 @@ public class MaritimeLogisticModel implements Serializable{
 
     @JoinColumn(name = "client_model_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ClientModel ClientModelId;
+    private ClientModel clientModelId;
 
     @JoinColumn(name = "storage_place_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private StoragePlaceModel StoragePlaceModelId;
+    private StoragePlaceModel storagePlaceModelId;
 
     public MaritimeLogisticModel() {
     }
@@ -62,7 +62,7 @@ public class MaritimeLogisticModel implements Serializable{
 
 
 
-    public MaritimeLogisticModel(Long id, Timestamp deliveryDate, String fleetNumber, String guideNumber, float quantity, Timestamp registerDate, float shippingPrice, float finalPrice, ClientModel ClientModelId, StoragePlaceModel StoragePlaceModelId) {
+    public MaritimeLogisticModel(Long id, Timestamp deliveryDate, String fleetNumber, String guideNumber, float quantity, Timestamp registerDate, float shippingPrice, float finalPrice, ClientModel clientModelId, StoragePlaceModel storagePlaceModelId) {
         this.id = id;
         this.deliveryDate = deliveryDate;
         this.fleetNumber = fleetNumber;
@@ -71,8 +71,8 @@ public class MaritimeLogisticModel implements Serializable{
         this.registerDate = registerDate;
         this.shippingPrice = shippingPrice;
         this.finalPrice = finalPrice;
-        this.ClientModelId = ClientModelId;
-        this.StoragePlaceModelId = StoragePlaceModelId;
+        this.clientModelId = clientModelId;
+        this.storagePlaceModelId = storagePlaceModelId;
     }
 
 
@@ -143,19 +143,19 @@ public class MaritimeLogisticModel implements Serializable{
     }
 
     public ClientModel getClientModelId() {
-        return ClientModelId;
+        return clientModelId;
     }
 
-    public void setClientModelId(ClientModel ClientModelId) {
-        this.ClientModelId = ClientModelId;
+    public void setClientModelId(ClientModel clientModelId) {
+        this.clientModelId = clientModelId;
     }
 
     public StoragePlaceModel getStoragePlaceModelId() {
-        return StoragePlaceModelId;
+        return storagePlaceModelId;
     }
 
-    public void setStoragePlaceModelId(StoragePlaceModel StoragePlaceModelId) {
-        this.StoragePlaceModelId = StoragePlaceModelId;
+    public void setStoragePlaceModelId(StoragePlaceModel storagePlaceModelId) {
+        this.storagePlaceModelId = storagePlaceModelId;
     }
 
     @Override

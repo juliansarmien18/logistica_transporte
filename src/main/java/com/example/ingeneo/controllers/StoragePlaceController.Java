@@ -3,6 +3,7 @@ package com.example.ingeneo.controllers;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import com.example.ingeneo.models.LogisticTypeModel;
 import com.example.ingeneo.models.StoragePlaceModel;
 import com.example.ingeneo.services.StoragePlaceService;
 
@@ -21,14 +22,19 @@ public class StoragePlaceController {
         return StoragePlaceService.getStoragePlaces();
     }
 
-    @PostMapping()
-    public StoragePlaceModel postStoragePlace(@RequestBody StoragePlaceModel StoragePlace){
-        return this.StoragePlaceService.saveStoragePlace(StoragePlace);
-    }
-
     @GetMapping(path = "/{id}")
     public Optional<StoragePlaceModel> getById(@PathVariable("id") Long id){
         return this.StoragePlaceService.getById(id);
+    }
+
+    @GetMapping("/logistictype")
+    public ArrayList<StoragePlaceModel> getByLogisticType(@RequestParam("logistictype") LogisticTypeModel logisticTypeModel){
+        return this.StoragePlaceService.getByLogisticType(logisticTypeModel);
+    }
+
+    @PostMapping()
+    public StoragePlaceModel postStoragePlace(@RequestBody StoragePlaceModel StoragePlace){
+        return this.StoragePlaceService.saveStoragePlace(StoragePlace);
     }
 
     @PutMapping(path = "/{id}")

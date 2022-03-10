@@ -19,10 +19,6 @@ public class ProductTypeModel implements Serializable{
     @Column(length = 20,name = "name",nullable = false,unique = true)
     private String name;
 
-    /*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productTypeModelId")
-    private Collection<ClientProductLogisticModel> ClientProductLogisticModelCollection;*/
-
     public ProductTypeModel() {
     }
 

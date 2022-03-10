@@ -19,13 +19,6 @@ public class LogisticTypeModel implements Serializable{
     @Column(length = 20,name = "name",nullable = false,unique = true)
     private String name;
 
-    /*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "logisticTypeModelId")
-    private Collection<ClientProductLogisticModel> clientProductLogisticModelCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "logisticTypeModelId")
-    private Collection<StoragePlaceModel> storagePlaceModelCollection;*/
-
 
     public LogisticTypeModel() {
     }

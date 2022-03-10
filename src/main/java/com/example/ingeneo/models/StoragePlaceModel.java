@@ -32,13 +32,6 @@ public class StoragePlaceModel implements Serializable{
     @Column(length = 30,name = "name",nullable = false)
     private String name;
 
-    /*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storagePlaceModelId")
-    private Collection<LandLogisticModel> LandLogisticModelCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "StoragePlaceModelId")
-    private Collection<MaritimeLogisticModel> MaritimeLogisticModelCollection;*/
-
     @JoinColumn(name = "logistic_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LogisticTypeModel logisticTypeModelId;

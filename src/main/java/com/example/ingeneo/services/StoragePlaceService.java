@@ -3,6 +3,7 @@ package com.example.ingeneo.services;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import com.example.ingeneo.models.LogisticTypeModel;
 import com.example.ingeneo.models.StoragePlaceModel;
 import com.example.ingeneo.repositories.StoragePlaceRepository;
 
@@ -17,6 +18,10 @@ public class StoragePlaceService {
 
     public ArrayList<StoragePlaceModel> getStoragePlaces(){
         return (ArrayList<StoragePlaceModel>) StoragePlaceRepository.findAll();
+    }
+
+    public ArrayList<StoragePlaceModel> getByLogisticType(LogisticTypeModel logistictype){
+        return (ArrayList<StoragePlaceModel>) StoragePlaceRepository.findBylogisticTypeModelId(logistictype);
     }
 
     public StoragePlaceModel saveStoragePlace(StoragePlaceModel StoragePlace){

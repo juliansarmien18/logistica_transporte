@@ -6,7 +6,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
+import com.example.ingeneo.models.ClientModel;
 import com.example.ingeneo.models.MaritimeLogisticModel;
+import com.example.ingeneo.models.StoragePlaceModel;
 import com.example.ingeneo.repositories.MaritimeLogisticRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,18 @@ public class MaritimeLogisticService {
 
     public ArrayList<MaritimeLogisticModel> getMaritimeLogistics(){
         return (ArrayList<MaritimeLogisticModel>) MaritimeLogisticRepository.findAll();
+    }
+
+    public Optional<MaritimeLogisticModel>getById(Long id){
+        return MaritimeLogisticRepository.findById(id);
+    }
+
+    public ArrayList<MaritimeLogisticModel> getByClient(ClientModel client){
+        return (ArrayList<MaritimeLogisticModel>) MaritimeLogisticRepository.findByclientModelId(client);
+    }
+
+    public ArrayList<MaritimeLogisticModel> getByStoragePlace(StoragePlaceModel storagePlace){
+        return (ArrayList<MaritimeLogisticModel>) MaritimeLogisticRepository.findBystoragePlaceModelId(storagePlace);
     }
 
     public MaritimeLogisticModel saveMaritimeLogistic(MaritimeLogisticModel MaritimeLogistic){
@@ -45,10 +59,6 @@ public class MaritimeLogisticService {
             MaritimeLogistic.getFleetNumber(),MaritimeLogistic.getGuideNumber(),MaritimeLogistic.getQuantity(),registerDate,
             MaritimeLogistic.getShippingPrice(),finalPrice,MaritimeLogistic.getClientModelId(),
             MaritimeLogistic.getStoragePlaceModelId()));
-    }
-
-    public Optional<MaritimeLogisticModel>getById(Long id){
-        return MaritimeLogisticRepository.findById(id);
     }
 
     public boolean deleteMaritimeLogistic(Long id){

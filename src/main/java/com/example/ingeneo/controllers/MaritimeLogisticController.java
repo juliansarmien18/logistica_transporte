@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.ingeneo.models.ClientModel;
 import com.example.ingeneo.models.MaritimeLogisticModel;
+import com.example.ingeneo.models.StoragePlaceModel;
 import com.example.ingeneo.services.MaritimeLogisticService;
 
 @RestController
@@ -21,15 +23,26 @@ public class MaritimeLogisticController {
         return MaritimeLogisticService.getMaritimeLogistics();
     }
 
+    @GetMapping(path = "/{id}")
+    public Optional<MaritimeLogisticModel> getById(@PathVariable("id") Long id){
+        return this.MaritimeLogisticService.getById(id);
+    }
+
+    @GetMapping("/client")
+    public ArrayList<MaritimeLogisticModel> getByClient(@RequestParam("client") ClientModel client){
+        return this.MaritimeLogisticService.getByClient(client);
+    }
+
+    @GetMapping("/storageplace")
+    public ArrayList<MaritimeLogisticModel> getByStoragePalce(@RequestParam("storageplace") StoragePlaceModel storagePlace){
+        return this.MaritimeLogisticService.getByStoragePlace(storagePlace);
+    }
+
     @PostMapping()
     public MaritimeLogisticModel postMaritimeLogistic(@RequestBody MaritimeLogisticModel MaritimeLogistic){
         return this.MaritimeLogisticService.saveMaritimeLogistic(MaritimeLogistic);
     }
 
-    @GetMapping(path = "/{id}")
-    public Optional<MaritimeLogisticModel> getById(@PathVariable("id") Long id){
-        return this.MaritimeLogisticService.getById(id);
-    }
 
     @PutMapping(path = "/{id}")
     public MaritimeLogisticModel putMaritimeLogistic(@PathVariable("id") Long id, @RequestBody MaritimeLogisticModel MaritimeLogistic){
